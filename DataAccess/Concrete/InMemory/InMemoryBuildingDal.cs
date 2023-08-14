@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace DataAccess.Concrete.InMemory
         {
             _buildings = new List<Building>
             {
-               new Building{BuildingCost= 1000, BuildingType=1, ConstructionTime= DateTime.Now},
-                new Building{BuildingCost= 12000, BuildingType=2, ConstructionTime= DateTime.Now}
+               new Building{BuildingCost= 1000, BuildingType=1, ConstructionTime= 35},
+                new Building{BuildingCost= 12000, BuildingType=2, ConstructionTime= 40}
             };
         }
         public void Add(Building building)
@@ -40,6 +41,16 @@ namespace DataAccess.Concrete.InMemory
         public List<Building> GetAll(Expression<Func<Building, bool>> filter = null)
         {
             return _buildings;
+        }
+
+        public List<BuildingDetailDto> GetBuildingDetails()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BuildingDetailDto> GetBuildingDetailsByType(string type)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Building building)

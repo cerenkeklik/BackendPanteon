@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Building: IEntity
+    public class BuildingDetailDto: IDto
     {
-        public int Id { get; set; }
-        public int BuildingType { get; set; }
+        public int BuildingId { get; set; }
+        public string BuildingType { get; set; }
         public int BuildingCost { get; set; }
         public int ConstructionTime { get; set; }
     }

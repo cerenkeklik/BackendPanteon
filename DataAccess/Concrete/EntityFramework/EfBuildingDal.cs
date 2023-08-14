@@ -1,6 +1,7 @@
-﻿using DataAccess.Abstract;
-using Entities.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,56 +12,44 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBuildingDal : IBuildingDal
+    public class EfBuildingDal : EfEntityRepositoryBase<Building, MysqlContext>, IBuildingDal
     {
-
-
-        public void Add(Building entity)
+        public List<BuildingDetailDto> GetBuildingDetails()
         {
-            //IDisposable imp. of c#  garbage collector deleted after using it
             using (MysqlContext ctx = new MysqlContext())
             {
-                var addedEntity = ctx.Entry(entity); //catch the referance
-                addedEntity.State = EntityState.Added;
-                ctx.SaveChanges();
+                var res = from b in ctx.Buildings
+                          join bt in ctx.BuildingTypes
+                          on b.BuildingType equals bt.Id
+                          select new BuildingDetailDto
+                          {
+                              BuildingCost = b.BuildingCost,
+                              BuildingId = b.Id,
+                              BuildingType = bt.BType,
+                              ConstructionTime = b.ConstructionTime
+                          };
+
+                return res.ToList();
             }
         }
 
-        public void Delete(Building entity)
+        public List<BuildingDetailDto> GetBuildingDetailsByType(string type)
         {
             using (MysqlContext ctx = new MysqlContext())
             {
-                var deletedEntity = ctx.Entry(entity); //catch the referance
-                deletedEntity.State = EntityState.Deleted;
-                ctx.SaveChanges();
-            }
-        }
+                var res = from b in ctx.Buildings
+                          join bt in ctx.BuildingTypes
+                          on b.BuildingType equals bt.Id
+                          where bt.BType == type
+                          select new BuildingDetailDto
+                          {
+                              BuildingCost = b.BuildingCost,
+                              BuildingId = b.Id,
+                              BuildingType = bt.BType,
+                              ConstructionTime = b.ConstructionTime
+                          };
+                return res.ToList();
 
-        public Building Get(Expression<Func<Building, bool>> filter)
-        {
-            using (MysqlContext ctx = new MysqlContext())
-            {
-               return ctx.Set<Building>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Building> GetAll(Expression<Func<Building, bool>> filter = null)
-        {
-            using (MysqlContext ctx = new MysqlContext())
-            {
-                return filter == null 
-                    ? ctx.Set<Building>().ToList() 
-                    : ctx.Set<Building>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Building entity)
-        {
-            using (MysqlContext ctx = new MysqlContext())
-            {
-                var updatedEntity = ctx.Entry(entity); //catch the referance
-                updatedEntity.State = EntityState.Modified;
-                ctx.SaveChanges();
             }
         }
     }

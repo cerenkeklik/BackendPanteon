@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Building: IEntity
+    public class BuildingType: IEntity
     {
         public int Id { get; set; }
-        public int BuildingType { get; set; }
-        public int BuildingCost { get; set; }
-        public int ConstructionTime { get; set; }
+        public string BType { get; set; }
     }
 }
