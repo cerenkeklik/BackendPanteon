@@ -12,8 +12,9 @@ namespace Business.Abstract
     public interface IBuildingService
     {
         IDataResult<List<Building>> GetAll();
-        IDataResult<List<BuildingDetailDto>> GetBuildingDetails();
-        IDataResult<List<BuildingDetailDto>> GetByType(string buildingType);
         IResult Add(Building building);
+        IDataResult<List<Building>> GetByUsername(string username);
+        IDataResult<List<int>> GetAvailableTypes(string username);
+
     }
 }

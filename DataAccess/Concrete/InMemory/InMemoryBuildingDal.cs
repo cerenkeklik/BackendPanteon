@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Building building)
         {
-            Building buildingToDelete = _buildings.Single((item) => item.Id == building.Id);
+            Building buildingToDelete = _buildings.Single((item) => item._id == building._id);
            _buildings.Remove(buildingToDelete);
         }
 
@@ -55,7 +55,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Building building)
         {
-            Building buildingToUpdate = _buildings.Single((item) => item.Id == building.Id);
+            Building buildingToUpdate = _buildings.Single((item) => item._id == building._id);
             buildingToUpdate.BuildingCost = building.BuildingCost;
             buildingToUpdate.BuildingType = building.BuildingType;
             buildingToUpdate.ConstructionTime = building.ConstructionTime;

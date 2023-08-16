@@ -11,9 +11,7 @@ namespace DataAccess.Abstract
 {
     public interface IBuildingDal: IEntityRepository<Building>
     {
-        List<BuildingDetailDto> GetBuildingDetails();
 
-        List<BuildingDetailDto> GetBuildingDetailsByType(string type);
 
     }
 }

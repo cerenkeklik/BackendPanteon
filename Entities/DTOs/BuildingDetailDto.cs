@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,9 @@ namespace Entities.DTOs
 {
     public class BuildingDetailDto: IDto
     {
-        public int BuildingId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ObjectId BuildingId { get; set; }
         public string BuildingType { get; set; }
         public int BuildingCost { get; set; }
         public int ConstructionTime { get; set; }

@@ -11,13 +11,13 @@ class Program
 
         //  BuildingTypesTest();
 
-        BuildingManager pm = new BuildingManager(new EfBuildingDal());
+        //BuildingManager pm = new BuildingManager(new EfBuildingDal());
 
-        foreach (var item in pm.GetBuildingDetails().Data)
-        {
-            Console.WriteLine(item.BuildingType);
-            Console.WriteLine(item.BuildingCost);
-        }
+        //foreach (var item in pm.GetBuildingDetails().Data)
+        //{
+        //    Console.WriteLine(item.BuildingType);
+        //    Console.WriteLine(item.BuildingCost);
+        //}
     }
 
     private static void BuildingTypesTest()

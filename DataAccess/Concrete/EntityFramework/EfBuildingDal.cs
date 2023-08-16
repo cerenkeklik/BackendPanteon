@@ -14,43 +14,5 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBuildingDal : EfEntityRepositoryBase<Building, MysqlContext>, IBuildingDal
     {
-        public List<BuildingDetailDto> GetBuildingDetails()
-        {
-            using (MysqlContext ctx = new MysqlContext())
-            {
-                var res = from b in ctx.Buildings
-                          join bt in ctx.BuildingTypes
-                          on b.BuildingType equals bt.Id
-                          select new BuildingDetailDto
-                          {
-                              BuildingCost = b.BuildingCost,
-                              BuildingId = b.Id,
-                              BuildingType = bt.BType,
-                              ConstructionTime = b.ConstructionTime
-                          };
-
-                return res.ToList();
-            }
-        }
-
-        public List<BuildingDetailDto> GetBuildingDetailsByType(string type)
-        {
-            using (MysqlContext ctx = new MysqlContext())
-            {
-                var res = from b in ctx.Buildings
-                          join bt in ctx.BuildingTypes
-                          on b.BuildingType equals bt.Id
-                          where bt.BType == type
-                          select new BuildingDetailDto
-                          {
-                              BuildingCost = b.BuildingCost,
-                              BuildingId = b.Id,
-                              BuildingType = bt.BType,
-                              ConstructionTime = b.ConstructionTime
-                          };
-                return res.ToList();
-
-            }
-        }
     }
 }

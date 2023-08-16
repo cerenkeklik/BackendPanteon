@@ -16,8 +16,6 @@ namespace DataAccess.Concrete.EntityFramework
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseMySQL(@"Server=mysqldbpanteon.mysql.database.azure.com;Database=panteondb; Username=adminpanteon; Password= Dev12345");
         }
-
-        public DbSet<Building> Buildings { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }
         public DbSet<User> Users { get; set; }
     }

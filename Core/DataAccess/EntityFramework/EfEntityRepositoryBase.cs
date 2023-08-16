@@ -24,16 +24,6 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public void Delete(TEntity entity)
-        {
-            using (TContext ctx = new TContext())
-            {
-                var deletedEntity = ctx.Entry(entity); //catch the referance
-                deletedEntity.State = EntityState.Deleted;
-                ctx.SaveChanges();
-            }
-        }
-
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext ctx = new TContext())
@@ -49,16 +39,6 @@ namespace Core.DataAccess.EntityFramework
                 return filter == null
                     ? ctx.Set<TEntity>().ToList()
                     : ctx.Set<TEntity>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(TEntity entity)
-        {
-            using (TContext ctx = new TContext())
-            {
-                var updatedEntity = ctx.Entry(entity); //catch the referance
-                updatedEntity.State = EntityState.Modified;
-                ctx.SaveChanges();
             }
         }
     }

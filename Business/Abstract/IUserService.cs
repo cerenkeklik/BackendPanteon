@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Business.Abstract
 {
     public interface IUserService
     {
-        void Add(User user);
+        IResult Add(User user);
+        User GetByUsername(string username);
         User GetByEmail(string email);
     }
 }
